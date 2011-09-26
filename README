@@ -1,0 +1,6 @@
+This is a python interface to the plotwatt readings api which allows you to
+manage and send data to your plotwatt.com account.
+
+Please refer to the test cases for examples of how this simple library works
+
+Send any questions or comments to zdwiel@plotwatt.com
