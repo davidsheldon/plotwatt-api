@@ -65,3 +65,4 @@ class Plotwatt():
         print data
         res = self._request(self.push_readings_url, data)
         assert res.getcode() == 200
+        return res
