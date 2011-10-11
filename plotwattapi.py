@@ -32,7 +32,7 @@ class Plotwatt():
         """ make a request to plotwatt.com """
         req = urllib2.Request(self.baseurl + url)
         req.add_header("Authorization", self.authheader)
-        return urllib2.urlopen(req, data)
+        return urllib2.urlopen(req, data, 5)
 
     def create_meters(self, num_meters):
         """ create meters on your plotwatt.com account """
