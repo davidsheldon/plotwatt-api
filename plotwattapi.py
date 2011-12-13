@@ -12,11 +12,11 @@ from datetime import datetime
 import time
 
 class Plotwatt():
-    def __init__(self, house_id, secret) :
+    def __init__(self, house_id, secret, baseurl="http://plotwatt.com") :
         self.house_id = house_id
         self.secret   = secret
-
-        self.baseurl = "http://plotwatt.com"
+        
+        self.baseurl = baseurl
         self.base64string = base64.encodestring('%s:%s' % (secret, ''))[:-1]
         self.authheader =  "Basic %s" % self.base64string
 
@@ -65,3 +65,4 @@ class Plotwatt():
         print data
         res = self._request(self.push_readings_url, data)
         assert res.getcode() == 200
+        return res
