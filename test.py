@@ -3,7 +3,7 @@
 import unittest
 from datetime import datetime, timedelta
 
-from plotwattapi import Plotwatt
+from plotwattapi import Plotwatt, PlotwattError
 
 class TestDisagDayGeneration(unittest.TestCase):
     def setUp(self):
@@ -25,6 +25,18 @@ class TestDisagDayGeneration(unittest.TestCase):
         now = datetime.now()
         second = seconds = timedelta(seconds=1)
         self.pw.push_readings(meter_id, [1, 2, 3], [now, now + 1*second, now + 2*second])
+
+    def test_push_invalid_readings(self):
+        self.pw.create_meters(1)
+        meter_id = self.pw.list_meters()[0]
+        
+        now = datetime.now() + timedelta(days = 2)
+        second = seconds = timedelta(seconds=1)
+        try :
+            self.pw.push_readings(meter_id, [1, 2, 3], [now, now + 1*second, now + 2*second])
+            assert 'the previous line should have raised an error'
+        except PlotwattError, e:
+            assert 'future' in str(e)
 
 def main() :
     unittest.main()

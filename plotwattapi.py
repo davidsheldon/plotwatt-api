@@ -10,6 +10,16 @@ Please email comments and questions to zdwiel@plotwatt.com
 import urllib2, base64
 from datetime import datetime
 import time
+import json
+
+class PlotwattError :
+    def __init__(self, raw_json) :
+        o = json.loads(raw_json)
+        self.entity = o['entity']
+        self.error  = o['error']
+    
+    def __str__(self) :
+        return "Plotwatt Error: %s - entity: %s" % (self.error, self.entity)
 
 class Plotwatt():
     def __init__(self, house_id, secret, baseurl="http://plotwatt.com") :
@@ -32,7 +42,12 @@ class Plotwatt():
         """ make a request to plotwatt.com """
         req = urllib2.Request(self.baseurl + url)
         req.add_header("Authorization", self.authheader)
-        return urllib2.urlopen(req, data, 5)
+        try :
+            return urllib2.urlopen(req, data, 5)
+        except urllib2.HTTPError, e :
+            if e.code == 422 :
+                raise PlotwattError(e.read())
+            raise e
 
     def create_meters(self, num_meters):
         """ create meters on your plotwatt.com account """
