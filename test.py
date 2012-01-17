@@ -19,8 +19,12 @@ class TestDisagDayGeneration(unittest.TestCase):
         assert len(self.pw.list_meters()) == 1
     
     def test_push_readings(self):
-        self.pw.create_meters(1)
+        new_meter_ids = self.pw.create_meters(1)
         meter_id = self.pw.list_meters()[0]
+        
+        # testing the return value of create_meters against the return value of list_meters
+        assert meter_id == new_meter_ids[0]
+        assert len(new_meter_ids) == 1
         
         now = datetime.now()
         second = seconds = timedelta(seconds=1)

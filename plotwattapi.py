@@ -51,7 +51,8 @@ class Plotwatt():
 
     def create_meters(self, num_meters):
         """ create meters on your plotwatt.com account """
-        return self._request(self.new_meters_url, "number_of_new_meters=%s" % num_meters)
+        res = self._request(self.new_meters_url, "number_of_new_meters=%s" % num_meters)
+        return json.loads(res.read())
 
     def delete_meter(self, meter_id):
         """ delete a meter from your plotwatt.com account """
