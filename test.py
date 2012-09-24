@@ -30,6 +30,9 @@ class TestDisagDayGeneration(unittest.TestCase):
         second = seconds = timedelta(seconds=1)
         self.pw.push_readings(meter_id, [1, 2, 3], [now, now + 1*second, now + 2*second])
 
+        # overwrite old readings
+        self.pw.push_readings(meter_id, [4, 5, 6], [now, now + 1*second, now + 2*second])
+
     def test_push_invalid_readings(self):
         self.pw.create_meters(1)
         meter_id = self.pw.list_meters()[0]
