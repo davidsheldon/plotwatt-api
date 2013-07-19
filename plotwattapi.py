@@ -13,13 +13,11 @@ import time
 import json
 
 class PlotwattError :
-    def __init__(self, raw_json) :
-        o = json.loads(raw_json)
-        self.entity = o['entity']
-        self.error  = o['error']
+    def __init__(self, message) :
+        self.message = message
     
     def __str__(self) :
-        return "Plotwatt Error: %s - entity: %s" % (self.error, self.entity)
+        return "Plotwatt Error: %s " % (self.message)
 
 class Plotwatt():
     def __init__(self, house_id, secret, baseurl="http://plotwatt.com") :

@@ -17,7 +17,7 @@ class TestDisagDayGeneration(unittest.TestCase):
         assert self.pw.list_meters() == []
         self.pw.create_meters(1)
         assert len(self.pw.list_meters()) == 1
-"""    
+    
     def test_push_readings(self):
         new_meter_ids = self.pw.create_meters(1)
         meter_id = self.pw.list_meters()[0]
@@ -43,8 +43,8 @@ class TestDisagDayGeneration(unittest.TestCase):
             self.pw.push_readings(meter_id, [1, 2, 3], [now, now + 1*second, now + 2*second])
             assert 'the previous line should have raised an error'
         except PlotwattError, e:
-            assert 'future' in str(e)
-"""
+            assert 'Unprocessable' in str(e)
+
 def main() :
     unittest.main()
 
