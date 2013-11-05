@@ -12,14 +12,14 @@ from datetime import datetime
 import time
 import json
 
-class PlotwattError :
+class PlotwattError(Exception) :
     def __init__(self, message) :
         self.message = message
     
     def __str__(self) :
         return "Plotwatt Error: %s " % (self.message)
 
-class Plotwatt():
+class Plotwatt(object) :
     def __init__(self, house_id, secret, baseurl="http://plotwatt.com") :
         self.house_id = house_id
         self.secret   = secret
