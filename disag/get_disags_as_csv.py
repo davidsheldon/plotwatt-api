@@ -68,7 +68,6 @@ def exportToCsv (data, byday=False):
     This is data for a house as a list
     [YYYY-mm-dd HH:MM:SS, 'group', kwhr ]
     """
-    from datetime import datetime
     from collections import defaultdict
 
     ddtotal = defaultdict (lambda: defaultdict(float))
