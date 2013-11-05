@@ -67,12 +67,12 @@ class Plotwatt():
         meters = [meter] * len(readings)
         
         def sanitize_times(t) :
-          """ if the input is a datetime, turn it into a timestamp, otherwise,
-          make sure that it is an intiger """
-          if isinstance(t, datetime) :
-            return str(int(time.mktime(t.timetuple())))
-          else :
-            return str(int(t))
+            """ if the input is a datetime, turn it into a timestamp,
+            otherwise, make sure that it is an intiger"""
+            if isinstance(t, datetime) :
+                return str(int(time.mktime(t.timetuple())))
+            else :
+                return str(int(t))
           
         times = map(sanitize_times, times)
         data = ','.join(map(lambda (m,r,t): "%s,%s,%s" % (m,r,t), zip(meters, readings, times)))
