@@ -14,8 +14,8 @@ curl -v -u username:password
 curl -v -u username:password
 'https://plotwatt.com/disags?start_date=2012-01-22&end_date=2012-01-26&house_ids=12'
 'https://plotwatt.com/disags?start_date=2012-01-22&end_date=2012-01-26&house_ids=1016,1017'
-
 """
+
 DISAGS_SERVICE='https://plotwatt.com/disags'
 def get_disags(username, password, start_date, end_date, house_ids=None):
     """
