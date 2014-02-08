@@ -42,7 +42,7 @@ class TestDisagDayGeneration(unittest.TestCase):
         try :
             self.pw.push_readings(meter_id, [1, 2, 3], [now, now + 1*second, now + 2*second])
             assert 'the previous line should have raised an error'
-        except PlotwattError, e:
+        except PlotwattError as e:
             assert 'Unprocessable' in str(e)
 
 def main() :
