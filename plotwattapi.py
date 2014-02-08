@@ -42,7 +42,7 @@ class Plotwatt(object) :
         req.add_header("Authorization", self.authheader)
         try :
             return urllib2.urlopen(req, data, 5)
-        except urllib2.HTTPError, e :
+        except urllib2.HTTPError as e :
             if e.code == 422 :
                 raise PlotwattError(e.read())
             raise e
