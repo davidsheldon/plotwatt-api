@@ -76,7 +76,6 @@ class Plotwatt(object) :
           
         times = map(sanitize_times, times)
         data = ','.join(map(lambda tup: "%s,%s,%s" % tup, zip(meters, readings, times)))
-        print data
         res = self._request(self.push_readings_url, data)
         assert res.getcode() == 200
         return res
