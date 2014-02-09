@@ -7,7 +7,14 @@ This is a basic interface to the plotwatt api.
 Please email comments and questions to zdwiel@plotwatt.com
 """
 
-import urllib2, base64
+# urllib2 got renamed to urllib for python3
+# https://stackoverflow.com/questions/6594620/python-3-2-unable-to-import-urllib2-importerror-no-module-named-urllib2
+try:
+    import urllib.request as urllib2
+except:
+    import urllib2
+
+import base64
 from datetime import datetime
 import time
 import json
