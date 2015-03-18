@@ -38,11 +38,17 @@ class Plotwatt(object):
 
     def _request(self, url, data=None):
         """ make a request to plotwatt.com """
-        res = self.session.post(self.baseurl + url, data=data)
-        if res.status_code == 422:
-            raise PlotwattError(r.text)
+        if data is None:
+            res = self.session.get(self.baseurl + url)
         else:
-            return res
+            res = self.session.post(self.baseurl + url, data=data)
+        try:
+            res.raise_for_status()
+        except requests.exceptions.HTTPError as e:
+            if e.response.status_code == 422:
+                raise PlotwattError(e.response.text)
+            raise
+        return res
 
     def create_meters(self, num_meters):
         """ create meters on your plotwatt.com account """
